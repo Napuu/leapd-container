@@ -3,11 +3,21 @@ Containerized leapd for the original Leap Motion controller
 
 ## Building the container
 
+### Option 1: Using a local tar file
+
 1. Get the Linux SDK from [here](https://www.ultraleap.com/downloads/leap-controller/)
-2. Move the SDK to the same dir as this Dockerfile (`TAR_FILE=tracking-software-linux.tar.gz`)
+2. Move the SDK to the same dir as this Dockerfile (name it `tracking-software-linux.tar.gz`)
 3. Build the container:
 ```bash
 podman build -f Dockerfile -t leapd .
+```
+
+### Option 2: Using a download link
+
+1. Get the download link for the Linux SDK from [here](https://www.ultraleap.com/downloads/leap-controller/)
+2. Build the container with the TAR_LINK build argument:
+```bash
+podman build -f Dockerfile -t leapd --build-arg TAR_LINK="https://your-download-link-here.tar.gz" .
 ```
 
 ## Running the container

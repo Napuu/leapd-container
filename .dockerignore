@@ -1,0 +1,12 @@
+# Ignore git files
+.git
+.gitignore
+
+# Ignore README
+README.md
+
+# Keep only the tar file (tracking-software-linux.tar.gz)
+# Everything else is ignored by default, then we whitelist what we need
+*
+!tracking-software-linux.tar.gz
+!launch.sh

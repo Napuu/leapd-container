@@ -1,13 +1,23 @@
 FROM fedora:42 AS builder
 
-RUN dnf install -y tar alien rpm-build && dnf clean all
+RUN dnf install -y tar alien rpm-build wget && dnf clean all
 
-ENV TAR_FILE=tracking-software-linux.tar.gz
+ARG TAR_FILE=tracking-software-linux.tar.gz
+ARG TAR_LINK=""
 WORKDIR /build
 
-COPY $TAR_FILE .
+# Copy everything from build context (use .dockerignore to control what gets copied)
+COPY . .
 
-RUN tar -xzvf $TAR_FILE && \
+# If TAR_LINK is provided, download the file
+RUN if [ -n "$TAR_LINK" ]; then \
+        echo "Downloading from TAR_LINK: $TAR_LINK"; \
+        wget -O ${TAR_FILE} "$TAR_LINK"; \
+    else \
+        echo "Using local TAR_FILE: ${TAR_FILE}"; \
+    fi
+
+RUN tar -xzvf ${TAR_FILE} && \
     alien -rv --scripts LeapDeveloperKit_*/Leap-*-x64.deb
 
 FROM fedora:42

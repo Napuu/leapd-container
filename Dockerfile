@@ -37,7 +37,10 @@ RUN rpm -ivh --nodeps --force ./*.rpm
 RUN dbus-uuidgen > /var/lib/dbus/machine-id && \
     mkdir -p /var/run/dbus
 
-COPY launch.sh /launch.sh
+RUN echo '#!/bin/bash' > /launch.sh && \
+    echo 'dbus-daemon --config-file=/usr/share/dbus-1/system.conf' >> /launch.sh && \
+    echo 'leapd --websockets_enabled=1 --websockets_allow_remote=1 --server_connect_ip=0.0.0.0' >> /launch.sh && \
+    chmod +x /launch.sh
 
 EXPOSE 6437
 

@@ -9,4 +9,3 @@ README.md
 # Everything else is ignored by default, then we whitelist what we need
 *
 !tracking-software-linux.tar.gz
-!launch.sh

@@ -15,11 +15,7 @@ podman build -f Dockerfile -t leapd .
 ### Option 2: Using a download link
 
 1. Get the download link for the Linux SDK from [here](https://www.ultraleap.com/downloads/leap-controller/)
-2. Create a dummy file in the build directory:
-```bash
-touch tracking-software-linux.tar.gz
-```
-3. Build the container with the TAR_LINK build argument:
+2. Build the container with the TAR_LINK build argument:
 ```bash
 podman build -f Dockerfile -t leapd --build-arg TAR_LINK="https://your-download-link-here.tar.gz" .
 ```

@@ -7,10 +7,10 @@ ARG TAR_LINK=""
 WORKDIR /build
 
 # Copy tar file from build context
-# Note: If using TAR_LINK, create an empty dummy file: touch tracking-software-linux.tar.gz
+# Note: If using TAR_LINK, create a dummy file first: touch tracking-software-linux.tar.gz
 COPY ${TAR_FILE} .
 
-# If TAR_LINK is provided, download the file (this will replace the copied file)
+# If TAR_LINK is provided, download the file (this will overwrite the copied file)
 RUN if [ -n "$TAR_LINK" ]; then \
         echo "Downloading from TAR_LINK: $TAR_LINK"; \
         wget -O ${TAR_FILE} "$TAR_LINK"; \
